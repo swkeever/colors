@@ -7175,10 +7175,22 @@ normalize.css@^8.0.1:
   resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-8.0.1.tgz#9b98a208738b9cc2634caacbc42d131c97487bf3"
   integrity sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==
 
-nouislider@^14.6.0:
+nouislider-react@^3.3.8:
+  version "3.3.8"
+  resolved "https://registry.yarnpkg.com/nouislider-react/-/nouislider-react-3.3.8.tgz#224540f39848e1a52070127f16460ef8f03152a7"
+  integrity sha512-Le0kUs29iaUEdaO3cdZcc7EXteFNpXVuasxz4F8Z520PUI17sJJAoggiScPu+Nz6vMx0o9SgK0v8bMXcePF20A==
+  dependencies:
+    nouislider "^14.5.0"
+
+nouislider@^14.5.0, nouislider@^14.6.0:
   version "14.6.0"
   resolved "https://registry.yarnpkg.com/nouislider/-/nouislider-14.6.0.tgz#10c409e4f9d5d0e72a3b1c2adcf827e9c3054e39"
   integrity sha512-KY0jH2pU4G/55wpoS5Ynyrc5xpOMZ10/Xr51sMYG/JxmYoPJGy3fG8mOMio0MJXerKp5Go3elwcODk3lX6mFMQ==
+
+nouislider@^9.2.0:
+  version "9.2.0"
+  resolved "https://registry.yarnpkg.com/nouislider/-/nouislider-9.2.0.tgz#e87c507de2b0b4d075038b5a42547c7dbbebaf69"
+  integrity sha1-6HxQfeKwtNB1A4taQlR8fbvrr2k=
 
 npm-run-path@^2.0.0:
   version "2.0.2"
@@ -8814,6 +8826,13 @@ react-is@^16.12.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+
+react-nouislider@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-nouislider/-/react-nouislider-2.0.1.tgz#94ba46d78627aa1f168d5744c4e2a89df67ab3d4"
+  integrity sha512-/K5cHKkvsvZ/fwgFATxkORAEtuiWVrQOqNchEInRn7qlv9mDh+LEq+NydFu91v7Cy2XjHzVPD9ZU12wg5t9yCg==
+  dependencies:
+    nouislider "^9.2.0"
 
 react-scripts@3.4.1:
   version "3.4.1"

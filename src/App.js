@@ -1,95 +1,43 @@
 import React, { useState } from 'react';
 import { FaCopy, FaTrashAlt } from 'react-icons/fa';
+import generateShades from './shades';
+import config from './config';
 
-function generateShades({ hue, saturation, lightness }) {
-  if (hue.start > hue.end) {
-    throw Error('hue.start > hue.end')
-  }
+const APP_DATA_KEY = 'appData';
 
-  if (lightness.start > lightness.end) {
-    throw Error('lightness.start > lightness.end')
-  }
-
-  let hs = [];
-  let dx = (hue.end - hue.start) / 9;
-  for (let x = hue.start; x <= hue.end; x += dx) {
-    hs.push(Math.round(x % 360));
-  }
-
-  let ls = [];
-  dx = (lightness.end - lightness.start) / 9;
-  for (let x = lightness.start; x <= lightness.end; x += dx) {
-    ls.push(Math.round(x));
-    
-  }
-
-  let ss = [];
-  for (let x = 10; x < 100; x += 10) {
-    const { a, b, c } = saturation;
-    ss.push(Math.round(a * x ** 2 + b * x + c));
-  }
-
-  let props = [];
-  for (let i = 0; i < 9; i++) {
-    props.push({
-      hue: hs[i],
-      saturation: ss[i],
-      lightness: ls[i],
-    });
-  }
-
-  return props;
+function random(max) {
+  return 
 }
 
-const config = {
-  hue: {
-    min: 0,
-    max: 360,
-    step: 1,
-  },
-  saturation: {
-    a: {
-      min: 0.02,
-      max: 0.03,
-      step: 0.001,
-    },
-    b: {
-      min: -3.0,
-      max: -2.0,
-      step: 0.1
-    },
-    c: {
-      min: 100,
-      max: 115,
-      step: 0.5,
-    },
-  },
-  lightness: {
-    min: 0,
-    max: 100,
-    step: 1,
-  },
-};
-
-const initialColor = {
+const getRandomColor = () => ({
   name: 'gray',
   hue: {
-    start: config.hue.min,
-    end: config.hue.min + 1,
+    start: Math.floor(Math.random() * config.hue.max),
+    range: 7,
   },
-  saturation: {
-    a: config.saturation.a.min,
-    b: config.saturation.b.min,
-    c: config.saturation.c.min,
-  },
+  saturation: 0.5,
   lightness: {
     start: config.lightness.min,
-    end: config.lightness.max,
+    range: 100,
   },
-};
+});
+
+function getInitialColors() {
+  const appData = localStorage.getItem(APP_DATA_KEY);
+  if (false && appData) {
+    return JSON.parse(appData);
+  }
+  return [getRandomColor()];
+}
 
 function App() {
-  const [colors, setColors] = useState([initialColor]);
+  const [colors, setColors] = useState(getInitialColors());
+
+  function handleCreate() {
+    const newColors = colors.concat(getRandomColor());
+    localStorage.setItem(APP_DATA_KEY, JSON.stringify(newColors));
+    setColors(newColors);
+  }
 
   const palette = colors.map((color, idx) => {
     const shades = generateShades(color);
@@ -97,6 +45,13 @@ function App() {
     function handleUpdate(newColor) {
       const newColors = Array.from(colors);
       newColors[idx] = newColor;
+      localStorage.setItem(APP_DATA_KEY, JSON.stringify(newColors));
+      setColors(newColors);
+    }
+
+    function handleDelete() {
+      const newColors = [...colors.slice(0, idx), ...colors.slice(idx + 1)];
+      localStorage.setItem(APP_DATA_KEY, JSON.stringify(newColors));
       setColors(newColors);
     }
 
@@ -129,9 +84,7 @@ function App() {
           </h2>
           <button
             type="button"
-            onClick={() =>
-              setColors([...colors.slice(0, idx), ...colors.slice(idx + 1)])
-            }
+            onClick={handleDelete}
             class="px-2 py-1 text-red-500 text-xl hover:bg-gray-100 focus:outline-none"
           >
             <FaTrashAlt />
@@ -140,51 +93,50 @@ function App() {
 
         <div class="mb-4">
           <div class="flex">
-            <div class="w-3/12">
-              Hue {color.hue.start}&deg; - {color.hue.end}&deg;
-            </div>
             <div class={styles.control}>
               <label>
-                0&deg;
+                Hue
+                {config.hue.min}&deg;
                 <input
                   class={styles.input}
                   type="range"
                   min={config.hue.min}
-                  max={color.hue.end - 1}
+                  max={config.hue.max}
                   step={config.hue.step}
                   value={color.hue.start}
                   onChange={(e) =>
                     handleUpdate({
                       ...color,
                       hue: {
+                        ...color.hue,
                         start: Number(e.target.value),
-                        end: color.hue.end,
                       },
                     })
                   }
                 />
-                {color.hue.end - 1}&deg;
+                {config.hue.max}&deg;
               </label>
               <label>
-                {color.hue.start + 1}&deg;
+                Range
+                {config.hue.min}&deg;
                 <input
                   class={styles.input}
                   type="range"
-                  min={color.hue.start + 1}
+                  min={config.hue.min}
                   max={config.hue.max}
                   step={config.hue.step}
-                  value={color.hue.end}
+                  value={color.hue.range}
                   onChange={(e) =>
                     handleUpdate({
                       ...color,
                       hue: {
-                        start: color.hue.start,
-                        end: Number(e.target.value),
+                        ...color.hue,
+                        range: Number(e.target.value),
                       },
                     })
                   }
                 />
-                360&deg;
+                {config.hue.max}&deg;
               </label>
             </div>
           </div>
@@ -192,61 +144,18 @@ function App() {
             <div class="w-3/12">Saturation</div>
             <div class={styles.control}>
               <label>
-                a
+                Boost
                 <input
                   class={styles.input}
                   type="range"
-                  min={config.saturation.a.min}
-                  max={config.saturation.a.max}
-                  step={config.saturation.a.step}
-                  value={color.saturation.a}
+                  min={config.saturation.min}
+                  max={config.saturation.max}
+                  step={config.saturation.step}
+                  value={color.saturation}
                   onChange={(e) =>
                     handleUpdate({
                       ...color,
-                      saturation: {
-                        ...color.saturation,
-                        a: Number(e.target.value),
-                      },
-                    })
-                  }
-                />
-              </label>
-              <label>
-                b
-                <input
-                  class={styles.input}
-                  type="range"
-                  min={config.saturation.b.min}
-                  max={config.saturation.b.max}
-                  step={config.saturation.b.step}
-                  value={color.saturation.b}
-                  onChange={(e) =>
-                    handleUpdate({
-                      ...color,
-                      saturation: {
-                        ...color.saturation,
-                        b: Number(e.target.value),
-                      },
-                    })
-                  }
-                />
-              </label>
-              <label>
-                c
-                <input
-                  class={styles.input}
-                  type="range"
-                  min={config.saturation.c.min}
-                  max={config.saturation.c.max}
-                  step={config.saturation.c.step}
-                  value={color.saturation.c}
-                  onChange={(e) =>
-                    handleUpdate({
-                      ...color,
-                      saturation: {
-                        ...color.saturation,
-                        c: Number(e.target.value),
-                      },
+                      saturation: Number(e.target.value),
                     })
                   }
                 />
@@ -257,12 +166,12 @@ function App() {
             <div class="w-3/12">Lightness</div>
             <div class="flex space-x-4">
               <label>
-                Start
+                Start 0%
                 <input
                   class={styles.input}
                   type="range"
                   min={config.lightness.min}
-                  max={color.lightness.end - 1}
+                  max={config.lightness.max}
                   step={config.lightness.step}
                   value={color.lightness.start}
                   onChange={(e) =>
@@ -275,25 +184,28 @@ function App() {
                     })
                   }
                 />
+                100%
               </label>
               <label>
-                End
+                Range 0%
                 <input
                   class={styles.input}
                   type="range"
-                  min={color.lightness.start + 1}
-                  max={config.lightness.max}
-                  value={color.lightness.end}
+                  min={color.lightness.min}
+                  max={config.lightness.max - config.lightness.start}
+                  step={config.lightness.step}
+                  value={color.lightness.range}
                   onChange={(e) =>
                     handleUpdate({
                       ...color,
                       lightness: {
                         ...color.lightness,
-                        end: Number(e.target.value),
+                        range: Number(e.target.value),
                       },
                     })
                   }
                 />
+                {config.lightness.max - color.lightness.start}%
               </label>
             </div>
           </div>
@@ -301,10 +213,6 @@ function App() {
 
         <ul class="flex mt-1 mb-8 justify-between items-center space-x-4">
           {shades.map(({ hue, lightness, saturation }) => {
-            if (saturation < 0) {
-              saturation = 0;
-            }
-
             const bgColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
             const copyText = `hsl-${hue}-${saturation}-${lightness}`;
 
@@ -344,7 +252,7 @@ function App() {
       <ul class="mt-16">{palette}</ul>
       <button
         type="button"
-        onClick={() => setColors(colors.concat(initialColor))}
+        onClick={handleCreate}
         class="bg-green-500 hover:bg-green-600 text-green-100 px-3 pt-2 pb-1 focus:outline-none"
       >
         Add Color
