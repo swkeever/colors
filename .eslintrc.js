@@ -3,18 +3,20 @@ module.exports = {
     browser: true,
     es2020: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb'],
+  extends: ["plugin:react/recommended", "airbnb"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
     ecmaVersion: 11,
-    sourceType: 'module',
+    sourceType: "module",
   },
-  plugins: ['react'],
+  plugins: ["react"],
   rules: {
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
-    'import/no-cycle': 0,
-    'react/prop-types': 0,
+    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
+    "import/no-cycle": 0,
+    "react/prop-types": 0,
+    "no-alert": 0,
+    "no-restricted-globals": 0,
   },
 };

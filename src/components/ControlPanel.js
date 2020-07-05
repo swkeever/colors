@@ -1,7 +1,10 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../App';
 import config from '../config';
-import ControlHeader from './ControlHeader';
+
+function ControlHeader({ children }) {
+  return <h3 className="text-gray-700 text-2xl">{children}</h3>;
+}
 
 export default function ControlPanel({ color }) {
   const { handleUpdate } = useContext(AppContext);
@@ -9,25 +12,35 @@ export default function ControlPanel({ color }) {
   const styles = {
     input: `
       bg-gray-200
-      ml-1
-      rounded
+      md:ml-1
       px-1
-      w-40
+      block
+      w-full
+      mx-auto
       cursor-pointer
       bg-blue-500
       `,
 
     control: `
-      flex 
-      space-x-8
-      ml-auto
+      flex
+      flex-col
+      md:flex-row
+      md:space-x-8
+      md:ml-auto
       text-gray-700
       `,
+
+    controlRow: `
+    flex
+    flex-col
+    md:flex-row
+    text-gray-800
+    `,
   };
 
   return (
     <>
-      <div className="flex">
+      <div className={styles.controlRow}>
         <ControlHeader>Hue</ControlHeader>
         <div className={styles.control}>
           <label htmlFor="hue-start">
@@ -70,7 +83,7 @@ export default function ControlPanel({ color }) {
           </label>
         </div>
       </div>
-      <div className="flex w-full text-gray-800">
+      <div className={styles.controlRow}>
         <ControlHeader>Saturation</ControlHeader>
         <div className={styles.control}>
           <label htmlFor="saturation-intensity">
@@ -138,7 +151,7 @@ export default function ControlPanel({ color }) {
           </label>
         </div>
       </div>
-      <div className="flex">
+      <div className={styles.controlRow}>
         <ControlHeader>Lightness</ControlHeader>
         <div className={styles.control}>
           <label htmlFor="lightness-start">

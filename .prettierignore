@@ -1,3 +1,6 @@
 # Ignore artifacts:
 build
 coverage
+
+# Ignore JavaScript in src, we'll let ESLint take care of that
+src/**/*.js

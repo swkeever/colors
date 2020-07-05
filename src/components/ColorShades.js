@@ -3,7 +3,7 @@ import { FaCopy } from 'react-icons/fa';
 
 export default function ColorShades({ color }) {
   return (
-    <ul className="flex justify-between items-center space-x-4">
+    <ul className="flex flex-col items-stretch md:flex-row justify-between md:items-center md:space-x-4">
       {color.shades.map(({ hue, lightness, saturation }, shadeIdx) => {
         const bgColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
         const copyText = `hsl-${hue}-${saturation}-${lightness}`;
@@ -18,7 +18,7 @@ export default function ColorShades({ color }) {
               onClick={() => {
                 navigator.clipboard.writeText(bgColor);
               }}
-              className="p-6 focus:outline-none opacity-0 hover:opacity-100 transition duration-75"
+              className="p-6 md:rounded focus:outline-none opacity-0 hover:opacity-100 transition duration-75"
             >
               <FaCopy
                 style={{
