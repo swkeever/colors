@@ -31,7 +31,7 @@ function getInitialColors() {
   if (appData) {
     return JSON.parse(appData);
   }
-  return [getRandomColor()];
+  return [];
 }
 
 function App() {
@@ -132,7 +132,7 @@ function App() {
         </ul>
         <ColorPalette />
         {!colors.length && (
-        <h2 className="text-4xl text-gray-800">
+        <h2 className="text-3xl md:text-4xl text-gray-800">
           <span
             role="img"
             aria-label="pointing down"
@@ -148,7 +148,7 @@ function App() {
           onClick={handleCreate}
           className="bg-green-500 rounded text-xl mt-12 mb-12 hover:bg-green-600 text-green-100 px-5 py-2 focus:outline-none"
         >
-          Add Color
+          Add Colors
         </button>
       </div>
     </AppContext.Provider>
