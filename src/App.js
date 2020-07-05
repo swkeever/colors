@@ -94,7 +94,7 @@ function App() {
           <button
             type="button"
             onClick={handleDelete}
-            className="px-4 py-1 text-red-500 text-3xl mb-2 hover:bg-gray-100 focus:outline-none"
+            className="px-4 py-1 text-gray-500 hover:text-red-400 text-3xl mb-2 hover:bg-red-100 focus:outline-none"
           >
             <FaTrashAlt />
           </button>
@@ -240,8 +240,8 @@ function App() {
                 <input
                   className={styles.input}
                   type="range"
-                  min={color.lightness.min}
-                  max={config.lightness.max - color.lightness.start}
+                  min={config.lightness.min}
+                  max={config.lightness.max}
                   step={config.lightness.step}
                   value={color.lightness.range}
                   onChange={(e) =>
@@ -304,7 +304,7 @@ function App() {
       <button
         type="button"
         onClick={handleCreate}
-        className="bg-green-500 text-xl mt-12 hover:bg-green-600 text-green-100 px-5 pt-3 pb-2 focus:outline-none"
+        className="bg-green-500 text-xl mt-12 mb-12 hover:bg-green-600 text-green-100 px-5 pt-3 pb-2 focus:outline-none"
       >
         Add Color
       </button>
