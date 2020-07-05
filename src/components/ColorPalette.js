@@ -30,12 +30,12 @@ export default function ColorPalette() {
         return (
           <li key={`color-${color.index.toString()}`}>
             <div className="flex justify-between mb-2">
-              <h2 className="text-2xl md:text-4xl w-32 text-gray-900">
+              <h2 className="text-2xl md:text-4xl  w-32 text-gray-900">
                 <input
                   onClick={(e) => e.target.select()}
                   value={color.name}
                   onChange={(e) => handleUpdate(color.index, { ...color, name: e.target.value })}
-                  className="focus:outline-none cursor-pointer py-1"
+                  className="focus:outline-none hover:bg-gray-100 cursor-pointer py-1"
                 />
               </h2>
               <div className="flex space-x-4">
