@@ -5,14 +5,10 @@ import config from './config';
 
 const APP_DATA_KEY = 'appData';
 
-function random(max) {
-  return Math.floor(Math.random() * max);
-}
-
 const getRandomColor = () => ({
   name: 'Click to name',
   hue: {
-    start: random(config.hue.max),
+    start: Math.floor(Math.random() * config.hue.max),
     range: 10,
   },
   saturation: {
@@ -304,11 +300,11 @@ function App() {
   return (
     <div className="max-w-3xl mx-auto relative font-mono">
       <h1 className="text-6xl mt-16 block">Color Generator</h1>
-      <ul className="mt-16">{palette}</ul>
+      <ul className="mt-16 flex flex-col space-y-12">{palette}</ul>
       <button
         type="button"
         onClick={handleCreate}
-        className="bg-green-500 text-xl mt-6 hover:bg-green-600 text-green-100 px-5 pt-3 pb-2 focus:outline-none"
+        className="bg-green-500 text-xl mt-12 hover:bg-green-600 text-green-100 px-5 pt-3 pb-2 focus:outline-none"
       >
         Add Color
       </button>
