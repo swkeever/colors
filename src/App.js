@@ -6,16 +6,20 @@ import config from './config';
 const APP_DATA_KEY = 'appData';
 
 function random(max) {
-  return 
+  return Math.floor(Math.random() * max);
 }
 
 const getRandomColor = () => ({
-  name: 'gray',
+  name: 'Click to name',
   hue: {
-    start: Math.floor(Math.random() * config.hue.max),
-    range: 7,
+    start: random(config.hue.max),
+    range: 10,
   },
-  saturation: 0.5,
+  saturation: {
+    a: config.saturation.a.max / 2,
+    b: config.saturation.b.max / 2,
+    c: config.saturation.c.max / 2,
+  },
   lightness: {
     start: config.lightness.min,
     range: 100,
@@ -24,7 +28,7 @@ const getRandomColor = () => ({
 
 function getInitialColors() {
   const appData = localStorage.getItem(APP_DATA_KEY);
-  if (false && appData) {
+  if (appData) {
     return JSON.parse(appData);
   }
   return [getRandomColor()];
@@ -62,43 +66,52 @@ function App() {
       rounded
       px-1
       w-40
-
+      cursor-pointer
+      bg-blue-500
       `,
 
       control: `
       flex 
-      space-x-4
-      mb-2
+      space-x-8
+      ml-auto
+      text-gray-700
+      `,
+
+      controlHeader: `
+      text-gray-800
+      text-2xl
+      font-medium
       `,
     };
 
     return (
-      <li>
-        <div class="flex justify-between mb-2">
-          <h2 class="text-2xl">
+      <li key={`color-${idx}`}>
+        <div className="flex justify-between mb-2">
+          <h2 className="text-4xl text-gray-900">
             <input
+              onClick={(e) => e.target.select()}
               value={color.name}
               onChange={(e) => handleUpdate({ ...color, name: e.target.value })}
-              class="focus:outline-none hover:bg-gray-100 w-full py-1"
+              className="focus:outline-none hover:bg-gray-100 w-full py-1"
             />
           </h2>
           <button
             type="button"
             onClick={handleDelete}
-            class="px-2 py-1 text-red-500 text-xl hover:bg-gray-100 focus:outline-none"
+            className="px-4 py-1 text-red-500 text-3xl mb-2 hover:bg-gray-100 focus:outline-none"
           >
             <FaTrashAlt />
           </button>
         </div>
 
-        <div class="mb-4">
-          <div class="flex">
-            <div class={styles.control}>
+        <div className="mb-4">
+          <div className="flex">
+            <h3 className={styles.controlHeader}>Hue</h3>
+            <div className={styles.control}>
               <label>
-                Hue
-                {config.hue.min}&deg;
+                <div className="">Start</div>
                 <input
-                  class={styles.input}
+                  className={styles.input}
                   type="range"
                   min={config.hue.min}
                   max={config.hue.max}
@@ -114,16 +127,14 @@ function App() {
                     })
                   }
                 />
-                {config.hue.max}&deg;
               </label>
               <label>
-                Range
-                {config.hue.min}&deg;
+                <div>Range</div>
                 <input
-                  class={styles.input}
+                  className={styles.input}
                   type="range"
                   min={config.hue.min}
-                  max={config.hue.max}
+                  max={config.hue.range}
                   step={config.hue.step}
                   value={color.hue.range}
                   onChange={(e) =>
@@ -136,63 +147,105 @@ function App() {
                     })
                   }
                 />
-                {config.hue.max}&deg;
               </label>
             </div>
           </div>
-          <div class="flex">
-            <div class="w-3/12">Saturation</div>
-            <div class={styles.control}>
+          <div className="flex w-full text-gray-800">
+            <h3 className={styles.controlHeader}>Saturation</h3>
+            <div className={styles.control}>
               <label>
-                Boost
+                <div>Intensity</div>
                 <input
-                  class={styles.input}
+                  className={styles.input}
                   type="range"
-                  min={config.saturation.min}
-                  max={config.saturation.max}
-                  step={config.saturation.step}
-                  value={color.saturation}
-                  onChange={(e) =>
+                  min={config.saturation.a.min}
+                  max={config.saturation.a.max}
+                  step={config.saturation.a.step}
+                  value={color.saturation.a}
+                  onChange={(e) => {
                     handleUpdate({
                       ...color,
-                      saturation: Number(e.target.value),
-                    })
-                  }
+                      saturation: {
+                        ...color.saturation,
+                        a: Number(e.target.value),
+                      },
+                    });
+                  }}
+                />
+              </label>
+              <label>
+                <div>Offset</div>
+                <input
+                  className={styles.input}
+                  type="range"
+                  min={config.saturation.b.min}
+                  max={config.saturation.b.max}
+                  step={config.saturation.b.step}
+                  value={color.saturation.b}
+                  onChange={(e) => {
+                    handleUpdate({
+                      ...color,
+                      saturation: {
+                        ...color.saturation,
+                        b: Number(e.target.value),
+                      },
+                    });
+                  }}
+                />
+              </label>
+              <label>
+                <div>Boost</div>
+                <input
+                  className={styles.input}
+                  type="range"
+                  min={config.saturation.c.min}
+                  max={config.saturation.c.max}
+                  step={config.saturation.c.step}
+                  value={color.saturation.c}
+                  onChange={(e) => {
+                    handleUpdate({
+                      ...color,
+                      saturation: {
+                        ...color.saturation,
+                        c: Number(e.target.value),
+                      },
+                    });
+                  }}
                 />
               </label>
             </div>
           </div>
-          <div class="flex">
-            <div class="w-3/12">Lightness</div>
-            <div class="flex space-x-4">
+          <div className="flex">
+            <h3 className={styles.controlHeader}>Lightness</h3>
+            <div className={styles.control}>
               <label>
-                Start 0%
+                <div>Start</div>
                 <input
-                  class={styles.input}
+                  className={styles.input}
                   type="range"
                   min={config.lightness.min}
                   max={config.lightness.max}
                   step={config.lightness.step}
                   value={color.lightness.start}
-                  onChange={(e) =>
+                  onChange={(e) => {
+                    const newStart = Number(e.target.value);
                     handleUpdate({
                       ...color,
                       lightness: {
                         ...color.lightness,
-                        start: Number(e.target.value),
+                        start: newStart,
                       },
-                    })
-                  }
+                    });
+                  }}
                 />
-                100%
               </label>
               <label>
-                Range 0%
+                <div>Range</div>
                 <input
-                  class={styles.input}
+                  className={styles.input}
                   type="range"
                   min={color.lightness.min}
-                  max={config.lightness.max - config.lightness.start}
+                  max={config.lightness.max - color.lightness.start}
                   step={config.lightness.step}
                   value={color.lightness.range}
                   onChange={(e) =>
@@ -205,25 +258,27 @@ function App() {
                     })
                   }
                 />
-                {config.lightness.max - color.lightness.start}%
               </label>
             </div>
           </div>
         </div>
 
-        <ul class="flex mt-1 mb-8 justify-between items-center space-x-4">
-          {shades.map(({ hue, lightness, saturation }) => {
+        <ul className="flex mt-1 mb-8 justify-between items-center space-x-4">
+          {shades.map(({ hue, lightness, saturation }, shadeIdx) => {
             const bgColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
             const copyText = `hsl-${hue}-${saturation}-${lightness}`;
 
             return (
-              <li style={{ backgroundColor: bgColor }}>
+              <li
+                key={`color-${idx}-shade-${shadeIdx}`}
+                style={{ backgroundColor: bgColor }}
+              >
                 <button
                   type="button"
                   onClick={() => {
                     navigator.clipboard.writeText(bgColor);
                   }}
-                  class="rounded p-6 focus:outline-none opacity-0 hover:opacity-100 transition duration-75"
+                  className="rounded p-6 focus:outline-none opacity-0 hover:opacity-100 transition duration-75"
                 >
                   <FaCopy
                     style={{
@@ -232,7 +287,7 @@ function App() {
                         100
                       )}%)`,
                     }}
-                    class="w-5 h-auto text-xl"
+                    className="w-5 h-auto text-xl"
                   />
                   <span id={copyText} className="hidden ">
                     {bgColor}
@@ -247,13 +302,13 @@ function App() {
   });
 
   return (
-    <div class="max-w-3xl mx-auto relative font-mono">
-      <h1 class="text-4xl mt-16 block">Color Generator</h1>
-      <ul class="mt-16">{palette}</ul>
+    <div className="max-w-3xl mx-auto relative font-mono">
+      <h1 className="text-6xl mt-16 block">Color Generator</h1>
+      <ul className="mt-16">{palette}</ul>
       <button
         type="button"
         onClick={handleCreate}
-        class="bg-green-500 hover:bg-green-600 text-green-100 px-3 pt-2 pb-1 focus:outline-none"
+        className="bg-green-500 text-xl mt-6 hover:bg-green-600 text-green-100 px-5 pt-3 pb-2 focus:outline-none"
       >
         Add Color
       </button>

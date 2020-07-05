@@ -14,12 +14,9 @@ export default function generateShades({ hue, saturation, lightness }) {
   }
 
   let ss = [];
-  for (let x of ls) {
-    const a = 0.01;
-    const b = 0;
-    const c = 112.5;
-    let y = a * x ** 2 + b * x + c;
-    y *= saturation;
+  for (let x = 10; x < 100; x += 10) {
+    const {a, b, c} = saturation;
+    let y = Math.round(a * ((x - b) ** 2) + c)
     y = Math.max(0, y);
     y = Math.min(100, y);
     ss.push(y);
@@ -35,6 +32,7 @@ export default function generateShades({ hue, saturation, lightness }) {
   }
 
   console.log(JSON.stringify(props, null, 4));
+  // console.log(saturation)
 
   return props;
 }

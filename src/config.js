@@ -3,15 +3,28 @@ const config = {
     min: 0,
     max: 359,
     step: 1,
+    range: 30,
   },
   saturation: {
-    min: 0,
-    max: 1,
-    step: 0.01,
+    a: {
+      min: 0,
+      max: 0.05,
+      step: 0.001,
+    },
+    b: {
+      min: 0,
+      max: 100,
+      step: 1,
+    },
+    c: {
+      min: 0,
+      max: 100,
+      step: 1,
+    },
   },
   lightness: {
-    min: 0,
-    max: 100,
+    min: 1,
+    max: 99,
     step: 1,
   },
 };
