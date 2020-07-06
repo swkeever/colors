@@ -88,6 +88,15 @@ function App() {
     text-gray-700
     mb-1
     `,
+
+    button: `
+    rounded 
+    md:text-xl 
+    my-4 
+    px-5 py-2 
+    focus:outline-none 
+    mr-2
+    `,
   };
 
   return (
@@ -99,8 +108,8 @@ function App() {
         handleDelete,
       }}
     >
-      <div className="max-w-3xl px-2 md:px-4 mx-auto relative">
-        <h1 className="text-5xl font-bold leading-none md:text-6xl md:mt-16 block">
+      <div className="max-w-3xl mt-4 px-2 md:px-4 mx-auto relative">
+        <h1 className="text-3xl font-bold leading-none md:text-6xl md:mt-16 block">
           <span className="text-blue-700">Color</span>
           {' '}
           <span className="text-blue-900">S</span>
@@ -114,7 +123,7 @@ function App() {
           <span className="text-blue-600">Generator</span>
 
         </h1>
-        <h2 className="mt-12 font-medium text-gray-700 text-lg">Getting Started</h2>
+        <h2 className="mt-8 md:mt-12 font-medium text-gray-700 text-lg">Getting Started</h2>
         <ul className="flex bg-gray-100 py-8 flex-col mt-1 rounded space-y-6 text-sm md:text-base text-gray-600">
           <li className={styles.listItem}>
             <FaCircle className={`${styles.listDisc} text-green-400`} />
@@ -168,7 +177,7 @@ function App() {
           <button
             type="button"
             onClick={handleCreate}
-            className="bg-green-500 rounded text-xl mt-12 mb-12 hover:bg-green-600 text-green-100 px-5 py-2 focus:outline-none mr-2"
+            className={`${styles.button} bg-green-500 hover:bg-green-600 text-green-100`}
           >
             {colors.length === 0 ? 'Initialize palette' : 'Add new color'}
           </button>
@@ -176,7 +185,7 @@ function App() {
           <button
             type="button"
             onClick={() => handleReplace(defaultColors)}
-            className="border border-blue-500 rounded text-xl mt-12 mb-12 hover:bg-blue-100 text-blue-500 px-5 py-2 focus:outline-none"
+            className={`${styles.button} border-blue-400 border hover:bg-blue-100 text-blue-500`}
           >
             Generate defaults
           </button>
@@ -187,7 +196,7 @@ function App() {
             <button
               type="button"
               onClick={deleteAll}
-              className="bg-red-500 rounded text-xl mt-12 mb-12 hover:bg-red-600 text-red-100 px-5 py-2 focus:outline-none ml-auto"
+              className={`${styles.button} bg-red-500 hover:bg-red-600 text-red-100 ml-auto`}
             >
               Delete all
             </button>
