@@ -2,43 +2,39 @@ import React, { useState } from 'react';
 import {
   FaCircle, FaEdit, FaTrashAlt,
 } from 'react-icons/fa';
-import config from './config';
 import ColorPalette from './components/ColorPalette';
+import { getInitialColors, defaultColors } from './utils/colors';
+import config from './utils/config';
 
-const APP_DATA_KEY = 'appData';
+export const APP_DATA_KEY = 'appData';
 export const AppContext = React.createContext();
-
-const getRandomColor = () => ({
-  name: 'Click to name',
-  hue: {
-    start: Math.floor(Math.random() * config.hue.max),
-    range: 10,
-  },
-  saturation: {
-    a: config.saturation.a.max / 2,
-    b: config.saturation.b.max / 2,
-    c: config.saturation.c.max / 2,
-  },
-  lightness: {
-    start: config.lightness.min,
-    range: 100,
-  },
-  editing: false,
-});
-
-function getInitialColors() {
-  const appData = localStorage.getItem(APP_DATA_KEY);
-  if (appData) {
-    return JSON.parse(appData);
-  }
-  return [];
-}
 
 function App() {
   const [colors, setColors] = useState(getInitialColors());
 
   function handleCreate() {
-    const newColors = colors.concat(getRandomColor());
+    const newColors = colors.concat({
+      name: 'Click to name',
+      hue: {
+        start: colors.length > 0 ? (colors[colors.length - 1].hue.start + 60) % 360 : 120,
+        range: 10,
+      },
+      saturation: {
+        a: config.saturation.a.max / 2,
+        b: config.saturation.b.max / 2,
+        c: config.saturation.c.max / 2,
+      },
+      lightness: {
+        start: config.lightness.min,
+        range: 100,
+      },
+      editing: true,
+    });
+    localStorage.setItem(APP_DATA_KEY, JSON.stringify(newColors));
+    setColors(newColors);
+  }
+
+  function handleReplace(newColors) {
     localStorage.setItem(APP_DATA_KEY, JSON.stringify(newColors));
     setColors(newColors);
   }
@@ -54,6 +50,15 @@ function App() {
     const deleteItem = window.confirm(`Are you sure you want to delete ${colors[idx].name}?`);
     if (deleteItem) {
       const newColors = [...colors.slice(0, idx), ...colors.slice(idx + 1)];
+      localStorage.setItem(APP_DATA_KEY, JSON.stringify(newColors));
+      setColors(newColors);
+    }
+  }
+
+  function deleteAll() {
+    const deleteItems = window.confirm('Are you sure you want to delete all colors?');
+    if (deleteItems) {
+      const newColors = [];
       localStorage.setItem(APP_DATA_KEY, JSON.stringify(newColors));
       setColors(newColors);
     }
@@ -143,13 +148,38 @@ function App() {
           Click to get started!
         </h2>
         )}
-        <button
-          type="button"
-          onClick={handleCreate}
-          className="bg-green-500 rounded text-xl mt-12 mb-12 hover:bg-green-600 text-green-100 px-5 py-2 focus:outline-none"
-        >
-          Add Colors
-        </button>
+        <div className="flex">
+          <button
+            type="button"
+            onClick={handleCreate}
+            className="bg-green-500 rounded text-xl mt-12 mb-12 hover:bg-green-600 text-green-100 px-5 py-2 focus:outline-none mr-2"
+          >
+            {colors.length === 0 ? 'Initialize palette' : 'Add new color'}
+          </button>
+          {colors.length === 0 && (
+          <button
+            type="button"
+            onClick={() => handleReplace(defaultColors)}
+            className="border border-blue-500 rounded text-xl mt-12 mb-12 hover:bg-blue-100 text-blue-500 px-5 py-2 focus:outline-none"
+          >
+            Generate defaults
+          </button>
+          )}
+
+          {
+            colors.length > 1 && (
+            <button
+              type="button"
+              onClick={deleteAll}
+              className="bg-red-500 rounded text-xl mt-12 mb-12 hover:bg-red-600 text-red-100 px-5 py-2 focus:outline-none ml-auto"
+            >
+              Delete all
+            </button>
+            )
+          }
+
+        </div>
+
       </div>
     </AppContext.Provider>
   );

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../App';
-import config from '../config';
+import config from '../utils/config';
 
 function ControlHeader({ children }) {
   return <h3 className="text-gray-700 text-2xl">{children}</h3>;

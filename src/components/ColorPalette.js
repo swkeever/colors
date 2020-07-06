@@ -3,7 +3,7 @@ import { FaTrashAlt, FaEdit, FaCheck } from 'react-icons/fa';
 import { AppContext } from '../App';
 import ControlPanel from './ControlPanel';
 import ColorShades from './ColorShades';
-import generateShades from '../shades';
+import generateShades from '../utils/shades';
 
 export default function ColorPalette() {
   const { colors, handleUpdate, handleDelete } = useContext(AppContext);
@@ -16,6 +16,14 @@ export default function ColorPalette() {
           index,
           shades: generateShades(clr),
         };
+
+        console.log(JSON.stringify({
+          name: clr.name,
+          lightness: clr.lightness,
+          saturation: clr.saturation,
+          hue: clr.hue,
+          editing: clr.editing,
+        }, null, 4));
         const styles = {
           icon: `
           px-4 

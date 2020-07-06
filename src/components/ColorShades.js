@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaCopy } from 'react-icons/fa';
-import useSpringState from '../useSpringState';
+import useSpringState from '../hooks/useSpringState';
 
 export default function ColorShades({ color }) {
   const [copied, setCopied] = useSpringState('', 3000);
