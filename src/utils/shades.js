@@ -47,7 +47,5 @@ export default function generateShades({ hue, saturation, lightness }) {
   const ss = generateSaturation(saturation);
   const props = combineResults({ hs, ls, ss });
 
-  // console.log(JSON.stringify(props, null, 4));
-
   return props;
 }

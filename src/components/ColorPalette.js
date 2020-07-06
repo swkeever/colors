@@ -7,7 +7,6 @@ import generateShades from '../utils/shades';
 
 export default function ColorPalette() {
   const { colors, handleUpdate, handleDelete } = useContext(AppContext);
-  console.log(JSON.stringify(colors, null, 4));
 
   return (
     <ul className="mt-16 flex flex-col space-y-12">

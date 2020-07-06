@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import ColorPalette from './components/ColorPalette';
-import { getInitialColors, defaultColors } from './utils/colors';
-import config from './utils/config';
+import { getInitialColors, defaultColors, getNextColor } from './utils/colors';
 
 export const APP_DATA_KEY = 'appData';
 export const AppContext = React.createContext();
@@ -10,25 +9,7 @@ function App() {
   const [colors, setColors] = useState(getInitialColors());
 
   function handleCreate() {
-    const newColors = colors.concat({
-      name: 'Click to name',
-      hue: {
-        start: colors.length > 0
-          ? (colors[colors.length - 1].hue.start + 60) % 360
-          : Math.floor(Math.random() * config.hue.max),
-        range: 10,
-      },
-      saturation: {
-        a: config.saturation.a.max / 2,
-        b: config.saturation.b.max / 2,
-        c: config.saturation.c.max / 2,
-      },
-      lightness: {
-        start: config.lightness.min,
-        range: 100,
-      },
-      editing: true,
-    });
+    const newColors = colors.concat(getNextColor(colors));
     localStorage.setItem(APP_DATA_KEY, JSON.stringify(newColors));
     setColors(newColors);
   }

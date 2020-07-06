@@ -1,4 +1,5 @@
 import { APP_DATA_KEY } from '../App';
+import config from './config';
 
 export const defaultColors = [
   {
@@ -128,4 +129,26 @@ export function getInitialColors() {
     return JSON.parse(appData);
   }
   return [];
+}
+
+export function getNextColor(colors) {
+  return ({
+    name: 'Click to name',
+    hue: {
+      start: colors.length > 0
+        ? (colors[colors.length - 1].hue.start + 60) % 360
+        : Math.floor(Math.random() * config.hue.max),
+      range: 10,
+    },
+    saturation: {
+      a: config.saturation.a.max / 2,
+      b: config.saturation.b.max / 2,
+      c: config.saturation.c.max / 2,
+    },
+    lightness: {
+      start: config.lightness.min,
+      range: 100,
+    },
+    editing: true,
+  });
 }
