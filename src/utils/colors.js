@@ -102,7 +102,8 @@ export const defaultColors = [
       start: 210,
     },
     editing: false,
-  }, {
+  },
+  {
     name: 'Violet',
     lightness: {
       start: 12,
@@ -123,7 +124,7 @@ export const defaultColors = [
 
 export function getInitialColors() {
   const appData = localStorage.getItem(APP_DATA_KEY);
-  if (false && appData) {
+  if (appData) {
     return JSON.parse(appData);
   }
   return [];
