@@ -181,8 +181,8 @@ export default function ControlPanel({ color }) {
               name="lightness-range"
               className={styles.input}
               type="range"
-              min={config.lightness.min}
-              max={config.lightness.max}
+              min={100 - config.lightness.range}
+              max={100}
               step={config.lightness.step}
               value={color.lightness.range}
               onChange={(e) => handleUpdate(color.index, {

@@ -46,8 +46,120 @@
     />
   </head>
 
-  <body>
+  <body class="flex flex-col min-h-screen">
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <header>
+      <div class="max-w-3xl mx-auto relative mt-4 px-2 md:px-4">
+        <h1 class="text-3xl font-bold leading-none md:text-6xl md:mt-16">
+          <span class="text-blue-700">Color</span>
+          <span class="text-blue-900">S</span
+          ><span class="text-blue-800">h</span
+          ><span class="text-blue-700">a</span
+          ><span class="text-blue-600">d</span
+          ><span class="text-blue-500">e</span
+          ><span class="text-blue-400">s</span>
+          <span class="text-blue-600">Generator</span>
+        </h1>
+        <h2 class="mt-8 md:mt-12 font-medium text-gray-700 text-lg">
+          Getting Started
+        </h2>
+        <ul
+          class="flex bg-gray-100 py-8 px-2 flex-col mt-1 rounded space-y-6 text-sm md:text-base text-gray-600"
+        >
+          <li class="flex">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="circle"
+              class="text-blue-500 w-4 inline my-auto mr-2"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <path
+                fill="currentColor"
+                d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"
+              ></path>
+            </svg>
+            <div class="">
+              Create, edit, and delete color shades any time.
+            </div>
+          </li>
+          <li class="flex">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="circle"
+              class="text-blue-400 w-4 inline my-auto mr-2"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <path
+                fill="currentColor"
+                d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"
+              ></path>
+            </svg>
+            <div class="">
+              Click a color shade to copy its HSL value.
+            </div>
+          </li>
+          <li class="flex">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="circle"
+              class="text-blue-300 w-4 inline my-auto mr-2"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <path
+                fill="currentColor"
+                d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"
+              ></path>
+            </svg>
+            <div class="">
+              Your work is automatically saved to your browser.
+            </div>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <main id="root"></main>
+    <footer class="bg-gray-200 mt-auto">
+      <div
+        class="flex h-16 px-4 items-center justify-between max-w-3xl mx-auto text-gray-600"
+      >
+        <div>
+          Created by
+          <a
+            href="https://skies.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-blue-500 border-b border-blue-400 pb-1 hover:text-blue-600 hover:border-blue-500"
+          >
+            Sean Keever </a
+          >.
+        </div>
+        <a
+          href="https://twitter.com/swkeever?ref_src=twsrc%5Etfw"
+          class="twitter-follow-button"
+          data-size="large"
+          data-show-screen-name="false"
+          data-lang="en"
+          data-show-count="false"
+          >Follow @swkeever</a
+        >
+        <script
+          async
+          src="https://platform.twitter.com/widgets.js"
+          charset="utf-8"
+        ></script>
+      </div>
+    </footer>
   </body>
 </html>

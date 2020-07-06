@@ -24,8 +24,9 @@ const config = {
   },
   lightness: {
     min: 0,
-    max: 100,
+    max: 25,
     step: 1,
+    range: 30,
   },
 };
 
