@@ -1,4 +1,4 @@
-# Color Generator
+# Color Shades Generator
 
 Check out this project [here](https://swkeever.github.io/color-generator)!
 
