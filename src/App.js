@@ -114,9 +114,10 @@ function App() {
           <span className="text-blue-600">Generator</span>
 
         </h1>
-        <ul className="flex flex-col space-y-6 mt-12 text-sm md:text-base text-gray-800">
+        <h2 className="mt-12 font-medium text-gray-700 text-lg">Getting Started</h2>
+        <ul className="flex bg-gray-100 py-8 flex-col mt-1 rounded space-y-6 text-sm md:text-base text-gray-600">
           <li className={styles.listItem}>
-            <FaCircle className={`${styles.listDisc} text-green-500`} />
+            <FaCircle className={`${styles.listDisc} text-green-400`} />
             <div className={styles.listItemText}>
               Click the
               {' '}
@@ -137,14 +138,14 @@ function App() {
             </div>
           </li>
           <li className={styles.listItem}>
-            <FaCircle className={`${styles.listDisc} text-blue-500`} />
+            <FaCircle className={`${styles.listDisc} text-blue-400`} />
             <div className={styles.listItemText}>
               Click a color shade to copy its HSL value.
 
             </div>
           </li>
           <li className={styles.listItem}>
-            <FaCircle className={`${styles.listDisc} text-red-500`} />
+            <FaCircle className={`${styles.listDisc} text-red-400`} />
             <div className={styles.listItemText}>
               Your work is automatically saved to your browser&apos;s local storage.
             </div>
