@@ -16,7 +16,9 @@ function App() {
     const newColors = colors.concat({
       name: 'Click to name',
       hue: {
-        start: colors.length > 0 ? (colors[colors.length - 1].hue.start + 60) % 360 : 120,
+        start: colors.length > 0
+          ? (colors[colors.length - 1].hue.start + 60) % 360
+          : Math.floor(Math.random() * config.hue.max),
         range: 10,
       },
       saturation: {
