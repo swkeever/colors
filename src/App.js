@@ -98,7 +98,20 @@ function App() {
       }}
     >
       <div className="max-w-3xl px-2 md:px-4 mx-auto relative">
-        <h1 className="text-5xl font-medium leading-none md:text-6xl md:mt-16 block">Color Generator</h1>
+        <h1 className="text-5xl font-bold leading-none md:text-6xl md:mt-16 block">
+          <span className="text-blue-700">Color</span>
+          {' '}
+          <span className="text-blue-900">S</span>
+          <span className="text-blue-800">h</span>
+          <span className="text-blue-700">a</span>
+          <span className="text-blue-600">d</span>
+          <span className="text-blue-500">e</span>
+          <span className="text-blue-400">s</span>
+
+          {' '}
+          <span className="text-blue-600">Generator</span>
+
+        </h1>
         <ul className="flex flex-col space-y-6 mt-12 text-sm md:text-base text-gray-800">
           <li className={styles.listItem}>
             <FaCircle className={`${styles.listDisc} text-green-500`} />
