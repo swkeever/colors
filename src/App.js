@@ -126,7 +126,7 @@ function App() {
         <h2 className="mt-8 md:mt-12 font-medium text-gray-700 text-lg">Getting Started</h2>
         <ul className="flex bg-gray-100 py-8 flex-col mt-1 rounded space-y-6 text-sm md:text-base text-gray-600">
           <li className={styles.listItem}>
-            <FaCircle className={`${styles.listDisc} text-green-400`} />
+            <FaCircle className={`${styles.listDisc} text-blue-500`} />
             <div className={styles.listItemText}>
               Click the
               {' '}
@@ -154,7 +154,7 @@ function App() {
             </div>
           </li>
           <li className={styles.listItem}>
-            <FaCircle className={`${styles.listDisc} text-red-400`} />
+            <FaCircle className={`${styles.listDisc} text-blue-300`} />
             <div className={styles.listItemText}>
               Your work is automatically saved to your browser&apos;s local storage.
             </div>
@@ -177,7 +177,7 @@ function App() {
           <button
             type="button"
             onClick={handleCreate}
-            className={`${styles.button} bg-green-500 hover:bg-green-600 text-green-100`}
+            className={`${styles.button} bg-blue-500 hover:bg-blue-600 text-blue-100`}
           >
             {colors.length === 0 ? 'Initialize palette' : 'Add new color'}
           </button>
@@ -185,7 +185,7 @@ function App() {
           <button
             type="button"
             onClick={() => handleReplace(defaultColors)}
-            className={`${styles.button} border-blue-400 border hover:bg-blue-100 text-blue-500`}
+            className={`${styles.button} border-blue-400 border hover:bg-blue-100 hover:text-blue-600 text-blue-500`}
           >
             Generate defaults
           </button>
@@ -196,7 +196,7 @@ function App() {
             <button
               type="button"
               onClick={deleteAll}
-              className={`${styles.button} bg-red-500 hover:bg-red-600 text-red-100 ml-auto`}
+              className={`${styles.button} hover:bg-red-100 border border-red-400 hover:text-red-600 text-red-500 ml-auto`}
             >
               Delete all
             </button>

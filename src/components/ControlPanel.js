@@ -15,7 +15,6 @@ export default function ControlPanel({ color }) {
       md:ml-1
       px-1
       block
-      w-full
       mx-auto
       cursor-pointer
       bg-blue-500
