@@ -1,6 +1,6 @@
 # Color Shades Generator 🎨
 
-✔️ Check out this project [here](https://swkeever.github.io/color-generator)!
+✔️ Check out this project [here](https://swkeever.github.io/colors)!
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
